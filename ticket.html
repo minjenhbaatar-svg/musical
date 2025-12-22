@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Ticket - Music Festival</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .main {
+    width: 1150px; /* Агуулга багтаахын тулд бага зэрэг сунгав */
+    height: 600px;
+    background-color: #8ACE00;
+    margin: 25px auto;
+    padding: 25px;
+}
+
+.main2 {
+    width:1100px;
+    height:550px;
+    background: #000000;
+    border: 6px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.5);
+    position: relative;
+
+}
+
+/* Navbar styles */
+.minimal-nav {
+    background: black;
+    padding: 15px 0;
+}
+
+.minimal-link {
+    font-weight: 500;
+    font-size: 15px;
+    color: #ffffff !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.minimal-link:hover {
+    background: #8ACE00;
+    color: #ffffff !important;
+}
+.premium-btn{
+  background:#8ACE00;
+  color:#000;
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight: bolder;
+  position: relative;
+  left: 90px;
+
+}
+
+.premium-btn:hover{
+  background:#6aa800;
+}
+    .ticket-section {
+    color: white;
+    height: 80%;
+    overflow-y: auto;
+}
+.login{
+    background-color: #000000;
+    font-size: 15px;
+    color:#ffffff;
+    padding: 8px 15px;
+    border-radius: 20px 20px ;
+    text-decoration: none;
+    font-weight: bolder;
+    position: relative;
+    left: 50px;
+}
+.user{
+    background-color: #ffffff;
+    font-size: 15px;
+    color:#8ACE00;
+    padding: 8px 15px;
+    border-radius: 20px 20px ;
+    text-decoration: none;
+    font-weight: bolder; 
+    position: relative;
+    left: 60px;
+}
+
+.login:hover{
+    background: #000000;
+    color:#8ACE00;
+}
+
+.user:hover{
+    background: #000000;
+    color:#8ACE00;   
+}
+.concert-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 20px;
+    border-left: 5px solid #8ACE00;
+    transition: 0.3s;
+}
+
+.concert-card:hover {
+    transform: scale(1.02);
+    background: #222;
+}
+
+.ticket-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8ACE00;
+}
+
+.btn-get-ticket {
+    background: #8ACE00;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    padding: 8px 20px;
+}
+
+.btn-get-ticket:hover {
+    background: white;
+}
+</style>
+</head>
+<body>
+     <div class="main">
+    <div class="main2">
+      <nav class="navbar navbar-expand-lg minimal-nav">
+        <div class="container">
+          <a class="navbar-brand fw-bold text-white" href="index.html">minje</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse justify-content-center " id="navMenu">
+      <ul class="navbar-nav gap-4 position1">
+        <li class="nav-item"><a class="nav-link minimal-link" href="index.html">Home</a></li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right position1">
+      <li><a class="login" href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a class="user" href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> 
+      <li><a style="text-decoration: none;" href="photos.html" class="premium-btn">Get Premium</a></li>
+    </ul>
+</nav>
+
+            <div class="ticket-section p-4">
+                <h2 class="text-center mb-4" style="color: #8ACE00;">UPCOMING CONCERTS</h2>
+                
+                <div class="row g-4" id="concert-list">
+                    </div>
+
+                <div id="booking-form" class="mt-5 p-4 d-none" style="background: #111; border-radius: 15px; border: 1px solid #8ACE00;">
+                    <h3 class="text-white">Book Your Ticket</h3>
+                    <p id="selected-concert" style="color: #8ACE00;"></p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" id="user-name" class="form-control bg-dark text-white border-secondary" placeholder="Your Name">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <input type="number" id="ticket-qty" class="form-control bg-dark text-white border-secondary" value="1" min="1">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button class="btn w-100 fw-bold" style="background: #8ACE00;" onclick="confirmBooking()">Confirm Purchase</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const concerts = [
+    { id: 1, name: "MUSIC FESTIVAL MONGOLIA 2026", date: "JULY 14, 2026", price: "50,000₮", location: "Central Stadium" },
+    { id: 2, name: "ROCK NIGHT ULAANBAATAR", date: "OCT 20, 2025", price: "35,000₮", location: "Hit Park" },
+    { id: 3, name: "HIP HOP CONCERT 2024", date: "DEC 15, 2024", price: "40,000₮", location: "UG Arena" }
+];
+
+let selectedId = null;
+
+function displayConcerts() {
+    const list = document.getElementById('concert-list');
+    list.innerHTML = concerts.map(c => `
+        <div class="col-md-6">
+            <div class="concert-card d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="m-0">${c.name}</h5>
+                    <small class="text-secondary">${c.date} | ${c.location}</small>
+                </div>
+                <div class="text-end">
+                    <div class="ticket-price mb-2">${c.price}</div>
+                    <button class="btn-get-ticket" onclick="openBooking(${c.id})">GET TICKET</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openBooking(id) {
+    selectedId = id;
+    const concert = concerts.find(c => c.id === id);
+    document.getElementById('booking-form').classList.remove('d-none');
+    document.getElementById('selected-concert').innerText = `Selecting for: ${concert.name}`;
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function confirmBooking() {
+    const name = document.getElementById('user-name').value;
+    const qty = document.getElementById('ticket-qty').value;
+    const concert = concerts.find(c => c.id === selectedId);
+
+    if (name.trim() === "") {
+        alert("Please enter your name!");
+        return;
+    }
+
+    alert(`Батлагдлаа! \nНэр: ${name} \nКонцерт: ${concert.name} \nТоо: ${qty} ш \nНийт үнэ: ${parseInt(concert.price.replace(',', '')) * qty}₮`);
+    document.getElementById('booking-form').classList.add('d-none');
+    document.getElementById('user-name').value = "";
+}
+
+displayConcerts();</script>
+</body>
+</html>
